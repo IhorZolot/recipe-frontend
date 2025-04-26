@@ -1,23 +1,20 @@
-import { Recipe } from '@/types/recipe';
+'use client';
 import Link from 'next/link';
-
+import { Recipe } from '@/types/recipe';
 interface Props {
-  related: Recipe[];
-  currentId: string;
   category: string;
+  relatedRecipes: Recipe[];
 }
 
-const SidebarRelated = ({ related, currentId, category }: Props) => {
-  const filtered = related.filter((r) => r.idMeal !== currentId).slice(0, 5);
-
+const SidebarRelated = ({ category, relatedRecipes }: Props) => {
   return (
     <aside className="col-span-1 bg-gray-100 p-4 rounded-md">
-      <h3 className="text-xl font-semibold mb-2 text-red-500">More in {category}</h3>
-      <ul className="text-sm space-y-2">
-        {filtered.map((item) => (
-          <li key={item.idMeal}>
-            <Link href={`/recipe/${item.idMeal}`} className="text-blue-600 hover:underline">
-              {item.strMeal}
+      <h3 className="text-xl font-semibold mb-4 text-red-500">More in {category}</h3>
+      <ul className="space-y-2">
+        {relatedRecipes.map((recipe) => (
+          <li key={recipe.idMeal}>
+            <Link href={`/recipe/${recipe.idMeal}`} className="text-blue-600 hover:underline">
+              {recipe.strMeal}
             </Link>
           </li>
         ))}

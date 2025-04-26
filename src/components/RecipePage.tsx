@@ -7,7 +7,6 @@ import SidebarRelated from './SidebarRelated';
 interface Props {
   id: string;
 }
-
 const RecipePage = async ({ id }: Props) => {
   const data = await getRecipeById(id);
   const recipe: Recipe = data.meals[0];
@@ -57,9 +56,8 @@ const RecipePage = async ({ id }: Props) => {
         </div>
       </div>
       <SidebarRelated
-        related={relatedRecipes}
-        currentId={recipe.idMeal}
-        category={recipe.strCategory || ''}
+        category={recipe.strCategory || 'Unknown Category'}
+        relatedRecipes={relatedRecipes}
       />
     </div>
   );
