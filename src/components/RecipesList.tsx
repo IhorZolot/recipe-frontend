@@ -11,6 +11,7 @@ import {
 import { Recipe } from '@/types/recipe';
 import RecipeCard from './RecipeCard';
 import RecipeFilters from './RecipeFilters';
+import styles from './RecipesList.module.css';
 
 const RecipesList = () => {
   const searchParams = useSearchParams();
@@ -46,15 +47,15 @@ const RecipesList = () => {
   }, [searchParams]);
 
   return (
-    <main className="max-w-6xl mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-6">{title}</h1>
+    <main className={styles.container}>
+      <h1 className={styles.title}>{title}</h1>
 
       <RecipeFilters />
 
       {recipes.length === 0 ? (
-        <p className="text-gray-600">No recipes found.</p>
+        <p className={styles.noResults}>No recipes found.</p>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <div className={styles.grid}>
           {recipes.map((recipe) => (
             <RecipeCard key={recipe.idMeal} recipe={recipe} />
           ))}

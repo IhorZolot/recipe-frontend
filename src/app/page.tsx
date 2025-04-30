@@ -1,11 +1,7 @@
-import Link from 'next/link';
+import PageComponent from './PageComponent';
 
 const Page = () => {
-  return (
-    <div>
-      <Link href="/recipes">Go to Recipes</Link>
-    </div>
-  );
+  return <PageComponent />;
 };
 
 export default Page;

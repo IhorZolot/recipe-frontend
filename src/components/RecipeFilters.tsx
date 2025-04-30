@@ -4,6 +4,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { getCategories, getAreas, getIngredients } from '@/services/api';
 import BackButton from './BackButton';
+import styles from './RecipeFilters.module.css';
 
 const RecipeFilters = () => {
   const router = useRouter();
@@ -44,11 +45,11 @@ const RecipeFilters = () => {
   };
 
   return (
-    <div className="flex flex-wrap gap-4 mb-6">
+    <div className={styles.filtersContainer}>
       <select
         defaultValue=""
         onChange={(e) => handleChange('ingredient', e.target.value)}
-        className="border px-2 py-1 rounded"
+        className={styles.select}
       >
         <option value="">By Ingredient</option>
         {ingredients.map((item) => (
@@ -61,7 +62,7 @@ const RecipeFilters = () => {
       <select
         defaultValue=""
         onChange={(e) => handleChange('area', e.target.value)}
-        className="border px-2 py-1 rounded"
+        className={styles.select}
       >
         <option value="">By Area</option>
         {areas.map((item) => (
@@ -74,7 +75,7 @@ const RecipeFilters = () => {
       <select
         defaultValue=""
         onChange={(e) => handleChange('category', e.target.value)}
-        className="border px-2 py-1 rounded"
+        className={styles.select}
       >
         <option value="">By Category</option>
         {categories.map((item) => (
@@ -83,6 +84,7 @@ const RecipeFilters = () => {
           </option>
         ))}
       </select>
+
       <BackButton />
     </div>
   );

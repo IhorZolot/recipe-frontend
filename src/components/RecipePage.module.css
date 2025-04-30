@@ -1,0 +1,58 @@
+.container {
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  gap: 2rem;
+}
+
+.image {
+  border-radius: 0.5rem;
+  width: 100%;
+  height: auto;
+}
+
+.title {
+  font-size: 2.25rem;
+  font-weight: bold;
+  margin-top: 1rem;
+}
+
+.areaLink {
+  color: #2563eb; /* Tailwind's blue-600 */
+  margin-top: 0.25rem;
+  display: block;
+  text-decoration: none;
+}
+.areaLink:hover {
+  text-decoration: underline;
+}
+
+.instructions {
+  margin-top: 1rem;
+  white-space: pre-line;
+}
+
+.ingredients {
+  margin-top: 2rem;
+}
+
+.ingredientsTitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.ingredientsList {
+  list-style-type: disc;
+  padding-left: 1rem;
+}
+
+.ingredientLink {
+  color: #2563eb;
+  text-decoration: none;
+}
+.ingredientLink:hover {
+  text-decoration: underline;
+}
