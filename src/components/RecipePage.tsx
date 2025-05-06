@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import SidebarRelated from './SidebarRelated';
 import styles from './RecipePage.module.css';
+import ScrollToTopButton from './ScrollToTopButton';
 
 interface Props {
   recipe: Recipe;
@@ -55,6 +56,7 @@ const RecipePage = ({ recipe, relatedRecipes }: Props) => {
         category={recipe.strCategory || 'Unknown Category'}
         relatedRecipes={relatedRecipes}
       />
+      <ScrollToTopButton />
     </div>
   );
 };

@@ -14,9 +14,9 @@ const RecipeFilters = () => {
   const [areas, setAreas] = useState<string[]>([]);
   const [ingredients, setIngredients] = useState<string[]>([]);
 
-  const [selectedIngredient, setSelectedIngredient] = useState('');
-  const [selectedArea, setSelectedArea] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('');
+  const selectedIngredient = searchParams.get('ingredient') || '';
+  const selectedArea = searchParams.get('area') || '';
+  const selectedCategory = searchParams.get('category') || '';
 
   useEffect(() => {
     const fetchFilters = async () => {
@@ -39,23 +39,11 @@ const RecipeFilters = () => {
   const handleChange = (type: 'ingredient' | 'area' | 'category', value: string) => {
     const params = new URLSearchParams(searchParams);
     params.set(type, value);
-
-    if (type !== 'ingredient') params.delete('ingredient');
-    if (type !== 'area') params.delete('area');
-    if (type !== 'category') params.delete('category');
-
     router.push(`/recipes?${params.toString()}`);
-
-    if (type === 'ingredient') setSelectedIngredient(value);
-    if (type === 'area') setSelectedArea(value);
-    if (type === 'category') setSelectedCategory(value);
   };
 
   const clearAllFilters = () => {
     router.push('/recipes');
-    setSelectedIngredient('');
-    setSelectedArea('');
-    setSelectedCategory('');
   };
 
   return (
