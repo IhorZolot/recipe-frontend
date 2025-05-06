@@ -22,7 +22,9 @@ export default function RecipeCard({ recipe }: Props) {
       <div className={styles.content}>
         <h2 className={styles.title}>{recipe.strMeal}</h2>
         <p className={styles.subtitle}>
-          {recipe.strArea} • {recipe.strCategory}
+          {recipe.strArea && recipe.strCategory
+            ? `${recipe.strArea} | ${recipe.strCategory}`
+            : recipe.strArea || recipe.strCategory}
         </p>
       </div>
     </Link>

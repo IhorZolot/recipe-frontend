@@ -8,9 +8,10 @@
 }
 
 .image {
-  border-radius: 0.5rem;
   width: 100%;
   height: auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .title {
@@ -20,7 +21,7 @@
 }
 
 .areaLink {
-  color: #2563eb; /* Tailwind's blue-600 */
+  color: #2563eb;
   margin-top: 0.25rem;
   display: block;
   text-decoration: none;
@@ -31,6 +32,7 @@
 
 .instructions {
   margin-top: 1rem;
+  line-height: 1.6;
   white-space: pre-line;
 }
 

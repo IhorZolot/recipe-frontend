@@ -3,8 +3,8 @@
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { getCategories, getAreas, getIngredients } from '@/services/api';
-import BackButton from './BackButton';
 import styles from './RecipeFilters.module.css';
+import { Button } from '@mui/material';
 
 const RecipeFilters = () => {
   const router = useRouter();
@@ -13,6 +13,10 @@ const RecipeFilters = () => {
   const [categories, setCategories] = useState<string[]>([]);
   const [areas, setAreas] = useState<string[]>([]);
   const [ingredients, setIngredients] = useState<string[]>([]);
+
+  const [selectedIngredient, setSelectedIngredient] = useState('');
+  const [selectedArea, setSelectedArea] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('');
 
   useEffect(() => {
     const fetchFilters = async () => {
@@ -29,7 +33,6 @@ const RecipeFilters = () => {
         console.error('❌ Error fetching filters:', error);
       }
     };
-
     fetchFilters();
   }, []);
 
@@ -42,12 +45,23 @@ const RecipeFilters = () => {
     if (type !== 'category') params.delete('category');
 
     router.push(`/recipes?${params.toString()}`);
+
+    if (type === 'ingredient') setSelectedIngredient(value);
+    if (type === 'area') setSelectedArea(value);
+    if (type === 'category') setSelectedCategory(value);
+  };
+
+  const clearAllFilters = () => {
+    router.push('/recipes');
+    setSelectedIngredient('');
+    setSelectedArea('');
+    setSelectedCategory('');
   };
 
   return (
     <div className={styles.filtersContainer}>
       <select
-        defaultValue=""
+        value={selectedIngredient}
         onChange={(e) => handleChange('ingredient', e.target.value)}
         className={styles.select}
       >
@@ -60,7 +74,7 @@ const RecipeFilters = () => {
       </select>
 
       <select
-        defaultValue=""
+        value={selectedArea}
         onChange={(e) => handleChange('area', e.target.value)}
         className={styles.select}
       >
@@ -73,7 +87,7 @@ const RecipeFilters = () => {
       </select>
 
       <select
-        defaultValue=""
+        value={selectedCategory}
         onChange={(e) => handleChange('category', e.target.value)}
         className={styles.select}
       >
@@ -85,7 +99,14 @@ const RecipeFilters = () => {
         ))}
       </select>
 
-      <BackButton />
+      <Button
+        variant="contained"
+        color="secondary"
+        onClick={clearAllFilters}
+        className={styles.button}
+      >
+        Clear All Filters
+      </Button>
     </div>
   );
 };

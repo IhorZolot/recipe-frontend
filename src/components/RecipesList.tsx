@@ -12,14 +12,18 @@ import { Recipe } from '@/types/recipe';
 import RecipeCard from './RecipeCard';
 import RecipeFilters from './RecipeFilters';
 import styles from './RecipesList.module.css';
+import { CircularProgress } from '@mui/material';
+import ScrollToTopButton from './ScrollToTopButton';
 
 const RecipesList = () => {
   const searchParams = useSearchParams();
   const [recipes, setRecipes] = useState<Recipe[]>([]);
   const [title, setTitle] = useState('All Recipes');
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
+      setIsLoading(true);
       const ingredient = searchParams.get('ingredient');
       const area = searchParams.get('area');
       const category = searchParams.get('category');
@@ -41,26 +45,31 @@ const RecipesList = () => {
       }
 
       setRecipes(data.meals || []);
+      setIsLoading(false);
     };
-
     fetchData();
   }, [searchParams]);
 
   return (
     <main className={styles.container}>
-      <h1 className={styles.title}>{title}</h1>
-
-      <RecipeFilters />
-
-      {recipes.length === 0 ? (
+      {isLoading ? (
+        <div className={styles.loaderContainer}>
+          <CircularProgress />
+        </div>
+      ) : recipes.length === 0 ? (
         <p className={styles.noResults}>No recipes found.</p>
       ) : (
-        <div className={styles.grid}>
-          {recipes.map((recipe) => (
-            <RecipeCard key={recipe.idMeal} recipe={recipe} />
-          ))}
-        </div>
+        <>
+          <h1 className={styles.title}>{title}</h1>
+          <RecipeFilters />
+          <div className={styles.grid}>
+            {recipes.map((recipe) => (
+              <RecipeCard key={recipe.idMeal} recipe={recipe} />
+            ))}
+          </div>
+        </>
       )}
+      <ScrollToTopButton />
     </main>
   );
 };
