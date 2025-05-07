@@ -1,5 +1,5 @@
-import RecipePage from '@/components/RecipePage';
 import { getRecipeById, getRecipesByCategory } from '@/services/api';
+import RecipePage from '@/components/RecipePage';
 import { Recipe } from '@/types/recipe';
 
 const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
